@@ -35,10 +35,22 @@ It will do so in three parts. First, the major challenges and concepts of P2P ne
 Second, some example applications of peer-to-peer computing will be discussed. 
 Finally, our concluding section will summarize peer-to-peer networking and why it is important.
 
-
 \section{Core Concepts}
 
 \subsection{Network Overlays}
+
+\paragraph{}
+
+The basic mechanism underlying peer-to-peer networks is the concept of an overlay network. 
+An overlay network is as the name suggests: a network of logical connections between nodes in the peer-to-peer network which live on top of existing TCP/IP networks \cite{overlay}. 
+Overlay networks can be split into two main categories which have been called structured overlay networks and unstructured overlay networks. 
+In a structured overlay network, nodes exist in a specific topology and content is placed at predetermined parts of the network in order to ensure routing and querying within the network can be done in an efficient manner \cite{overlay}. 
+In contrast, unstructured peer-to-peer networks do away with any notions of centrality at all. 
+Nodes freely enter and exit the network without needing to know any details about the topology \cite{overlay}.
+
+\paragraph{}
+
+Structured P2P systems generally rely on what is called a Distributed Hash Table, or DHT.
 
 \subsection{Routing}
 
@@ -52,5 +64,12 @@ Freenet\\
 BitTorrent\\
 
 \section{Conclusion}
+
+\begin{thebibliography}{1}
+
+  \bibitem{overlay}
+    http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=1610546&newsearch=true&queryText=survey%20comparison%20peer-to-peer%20overlay%20network
+
+\end{thebibliography}
 
 \end{document}
