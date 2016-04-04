@@ -24,15 +24,15 @@
 \paragraph{}
 
 A peer-to-peer architecture, or P2P, is the usual alternative to an architecture based on the client-server model.
-In the client-server model, one or more central machines provide resources and services to client machines. 
-The two different machines, the client and the server, are separate in the sense that the server performs all or most of the computation on behalf of the client. 
+In the client-server model, one or more central machines provide resources and services to client machines.
+The two different machines, the client and the server, are separate in the sense that the server performs all or most of the computation on behalf of the client.
 In contrast, within a P2P network all the machines both provide and request computational resources and thus operate both as client and server. All the machines in a peer-to-peer network can therefore be considered equals or ``peers.''
 
 \paragraph{}
 
-This paper seeks to summarize the findings of our research into peer-to-peer networks. 
-It will do so in three parts. First, the major challenges and concepts of P2P networking will be explored; these include network overlays, routing, and resource discovery. 
-Second, some example applications of peer-to-peer computing will be discussed. 
+This paper seeks to summarize the findings of our research into peer-to-peer networks.
+It will do so in three parts. First, the major challenges and concepts of P2P networking will be explored; these include network overlays, routing, and resource discovery.
+Second, some example applications of peer-to-peer computing will be discussed.
 Finally, our concluding section will summarize peer-to-peer networking and why it is important.
 
 \section{Core Concepts}
@@ -41,18 +41,18 @@ Finally, our concluding section will summarize peer-to-peer networking and why i
 
 \paragraph{}
 
-The basic mechanism underlying peer-to-peer networks is the concept of an overlay network. 
-An overlay network is as the name suggests: a network of logical connections between nodes in the peer-to-peer network which live on top of existing TCP/IP networks \cite{overlay}. 
-Overlay networks can be split into two main categories which have been called structured overlay networks and unstructured overlay networks. 
-In a structured overlay network, nodes exist in a specific topology and content is placed at predetermined parts of the network in order to ensure routing and querying within the network can be done in an efficient manner \cite{overlay}. 
+The basic mechanism underlying peer-to-peer networks is the concept of an overlay network.
+An overlay network is as the name suggests: a network of logical connections between nodes in the peer-to-peer network which live on top of existing TCP/IP networks \cite{overlay}.
+Overlay networks can be split into two main categories which have been called structured overlay networks and unstructured overlay networks.
+In a structured overlay network, nodes exist in a specific topology and content is placed at predetermined parts of the network in order to ensure routing and querying within the network can be done in an efficient manner \cite{overlay}.
 This control of resource placement allows even request for rare items to be routed efficiently through the network.
-In contrast, unstructured peer-to-peer networks do away with any notions of centrality at all. 
+In contrast, unstructured peer-to-peer networks do away with any notions of centrality at all.
 Nodes freely enter and exit the network without needing to know any details about the topology \cite{overlay}.
 Unstructured P2P networks have poor performance when rare resources are requested, but generally good performance when popular, highly replicated resources are searched for \cite{overlay}.
 
 \paragraph{}
 
-Structured P2P systems often rely on what is called a Distributed Hash Table, or DHT. Distributed Hash Tables work by assigning to each participating node in the network a key. 
+Structured P2P systems often rely on what is called a Distributed Hash Table, or DHT. Distributed Hash Tables work by assigning to each participating node in the network a key.
 The key assigned to a node is determined by the overlay protocol \cite{overlay}. To find a resource in the network, the key, value pair {k,v} is computed and then a request for the resouce is routed through the network to the node which has been assigned key k, which returns the resource corresponding to value v.
 Likewise for placing a resource in the network \cite{overlay}.
 
@@ -60,14 +60,14 @@ Likewise for placing a resource in the network \cite{overlay}.
 
 \paragraph{}
 
-The routing scheme used in a P2P network is dependent upon whether the network is structured or unstructured. 
-Unstructured P2P networks use flooding as the routing mechanism \cite{overlay}, generally with some type of hop-count based TTL in order to avoid queries endlessly routing around the network. 
+The routing scheme used in a P2P network is dependent upon whether the network is structured or unstructured.
+Unstructured P2P networks use flooding as the routing mechanism \cite{overlay}, generally with some type of hop-count based TTL in order to avoid queries endlessly routing around the network.
 In structured P2P networks, a node keeps a small routing table which has addresses and DHT key values of neighbouring nodes in the overlay network \cite{overlay}.
 This enables efficient routing, as when a request comes in to a node for key k, the node can determine where to rout the request by using the lookup table.
 
 \paragraph{}
 
-The routing mechanism can have a great affect on the performance of a P2P network. 
+The routing mechanism can have a great affect on the performance of a P2P network.
 For instance, in networks designed for streaming media \cite{streaming} the routing mechanism can determine both the quality of streams in the network and what happens when a peer is interrupted in the midst of forwarding a stream onto other peers.
 
 \subsection{Resource Discovery}
