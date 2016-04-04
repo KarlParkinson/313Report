@@ -73,6 +73,45 @@ For instance, in networks designed for streaming media \cite{streaming} the rout
 
 \subsection{Resource Discovery}
 
+\subsection{Distributed Hash Tables}
+
+\paragraph{}
+
+Distributed hash tables (DHT) are a type of decentralized distributed system in which data is inserted and accessed through the use of a unique key, similar to a hash table \cite{dht}\cite{wiki-dht}.
+
+\paragraph{}
+
+Normally, the keyspace of a DHT is represented by the set of strings of digits of a given length.
+A hash function is then chosen which maps both data and participating nodes to keys.
+The hash function used must have some way to define the 'closeness' of two keys \cite{dht}, and is usually chosen such that updates to the DHT only change a localized set of keys \cite{wiki-dht}.
+This property is desirable in a DHT, as remapping the data in the DHT to new keys requires moving the data to different nodes over the network, which can be bandwidth-intensive \cite{wiki-dht}.
+
+\paragraph{}
+
+Data storage in a DHT is distributed across the participating nodes.
+Given some set of data which hashes to key $k$, the node with the 'closest' key will be responsible for storing the data \cite{dht-ietf}.
+When a node joins the DHT and is assigned a key, it will contact 'close' nodes and split the responsibility for storing some of their data with itself \cite{dht-ietf}.
+When a node leaves the DHT, its data is replicated to surviving 'close' nodes \cite{dht-ietf}
+
+\paragraph{}
+
+Lookup in a DHT is accomplished using key-based routing.
+Nodes in the DHT maintain a routing table containing the key of their neighbours.
+When the data stored at key $k$ is requested, the node receiving the request will forward it to the neighbour with the closest key \cite{dht}.
+If the node with the closest key is the node receiving the request, then it is responsible for either storing the data in the request, or retrieving the data with the received key \cite{dht}.
+The number of neighbours a node in the DHT needs to know about is weighed against the longest route length desired in the DHT.
+Increasing the degree of each node has the effect of decreasing the route length, and vice-versa \cite{wiki-dht}.
+Usually, the degree of nodes in the DHT is chosen to provide $O(\log n)$ lookup, where $n$ is the number of nodes in the DHT.
+
+\paragraph{}
+
+DHTs exhibit very desirable properties when used to construct P2P networks.
+They are highly scalable, as load is automatically distributed, they are somewhat robust against node failure, and they are self-organizing \cite{dht-ietf}.
+However, DHTs also offer some challenges.
+Content in a DHT is looked up by key, which causes complications when keyword or content-based searching is required \cite{dht}\cite{dht-ietf}.
+As well, DHTs route based on closest key, when it might also be desirable to route based on the distance of nodes in the underlying network \cite{dht}.
+Routing based on keys has the effect of being ill-equipped to handle changing congestion in the network or being able to find the path with the least delay.
+
 \section{Applications}
 
 Freenet, BitTorrent
