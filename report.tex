@@ -71,8 +71,6 @@ This enables efficient routing, as when a request comes in to a node for key k, 
 The routing mechanism can have a great affect on the performance of a P2P network.
 For instance, in networks designed for streaming media \cite{streaming} the routing mechanism can determine both the quality of streams in the network and what happens when a peer is interrupted in the midst of forwarding a stream onto other peers.
 
-\subsection{Resource Discovery}
-
 \subsection{Distributed Hash Tables}
 \label{DHT}
 
@@ -112,6 +110,38 @@ However, DHTs also offer some challenges.
 Content in a DHT is looked up by key, which causes complications when keyword or content-based searching is required \cite{dht}\cite{dht-ietf}.
 As well, DHTs route based on closest key, when it might also be desirable to route based on the distance of nodes in the underlying network \cite{dht}.
 Routing based on keys has the effect of being ill-equipped to handle changing congestion in the network or being able to find the path with the least delay.
+
+\subsection{Resource Discovery}
+\paragraph{}
+One of the challenges of P2P networking is finding efficient strategies for resource discovery in the network.
+Resource discovery encompasses discovery of both other nodes in the network and what resources those nodes have available, which could be particular data, storage capability, or computing power \cite{wiki-p2p}.
+
+\paragraph{}
+To enable resource discovery, nodes joining the network require a mechanism through which to advertise a 'resource specification' to the rest of the network \cite{resource}.
+This advertisement is easiest in centralized P2P networks, where nodes joining the network can advertise their IP address and resources to the central server, before being added to the overlay network \cite{resource-mobile}\cite{resource}.
+However, while this provides easy discovery, the use of a central server is not as scaleable as decentralized solutions, and can lead to a single point of failure in the network.
+
+\paragraph{}
+Decentralized solutions are more robust, but have challenges of their own.
+These solutions require some scheme to be in place for nodes to be able to join the network.
+One such scheme is the use of 'bootstrap' nodes, which are publicly known, and can therefore provide a point of entry into the network \cite{dht-ietf}.
+So long as enough 'bootstrap' nodes are specified, this method is robust to node failure and churn.
+
+\paragraph{}
+In unstructured P2P networks, resource discovery usually involves the need to flood the network with the request or perform some sort of random walk through the network \cite{resource}\cite{resource-mobile}.
+While flooding works, it is very costly, and therefore does not scale well beyond small networks.
+On the other hand, while random walks are much more efficient, they are not guaranteed to find the requested resource, and therefore suffer from quality-of-service issues \cite{resource}.
+
+\paragraph{}
+Structured P2P networks such as those based on DHTs provide better resource discovery than unstructured networks, when the resource query is exact.
+As discussed in Section \ref{DHT}, key-based routing allows us to quickly and efficiently discover resources in the network, with the caveat that we must know what exactly we are looking for.
+The drawbacks of structured solutions are that they do not perform well when given 'fuzzy' queries, and have a higher maintenance overhead as nodes join and leave the network, due to their load-balancing nature \cite{resource}\cite{resource-mobile}.
+
+\subsection{Friend-to-friend Networks}
+Another of the challenges of P2P networking is providing anonymity to the users of the network.
+Among the various solutions to this problem, we will discuss friend-to-friend (F2F) networks here.
+F2F networks are a special type of private P2P network in which nodes only directly communicate with known trusted nodes \cite{wiki-f2f}.
+
 
 \section{Applications}
 
