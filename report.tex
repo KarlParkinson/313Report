@@ -23,25 +23,22 @@
 \section{Introduction}
 
 \paragraph{}
-
 A peer-to-peer architecture, or P2P, is the usual alternative to an architecture based on the client-server model.
 In the client-server model, one or more central machines provide resources and services to client machines.
 The two different machines, the client and the server, are separate in the sense that the server performs all or most of the computation on behalf of the client.
 In contrast, within a P2P network all the machines both provide and request computational resources and thus operate both as client and server. All the machines in a peer-to-peer network can therefore be considered equals or ``peers.''
 
-\paragraph{}
+%\paragraph{}
 
-This paper seeks to summarize the findings of our research into peer-to-peer networks.
-It will do so in three parts. First, the major challenges and concepts of P2P networking will be explored; these include network overlays, routing, and resource discovery.
-Second, some example applications of peer-to-peer computing will be discussed.
-Finally, our concluding section will summarize peer-to-peer networking and why it is important.
+%This paper seeks to summarize the findings of our research into peer-to-peer networks.
+%It will do so in three parts. First, the major challenges and concepts of P2P networking will be explored; these include network overlays, routing, and resource discovery.
+%Second, some example applications of peer-to-peer computing will be discussed.
+%Finally, our concluding section will summarize peer-to-peer networking and why it is important.
 
 \section{Core Concepts}
 
 \subsection{Network Overlays}
-
 \paragraph{}
-
 The basic mechanism underlying peer-to-peer networks is the concept of an overlay network.
 An overlay network is as the name suggests: a network of logical connections between nodes in the peer-to-peer network which live on top of existing TCP/IP networks \cite{overlay}.
 Overlay networks can be split into two main categories which have been called structured overlay networks and unstructured overlay networks.
@@ -51,65 +48,53 @@ In contrast, unstructured peer-to-peer networks do away with any notions of cent
 Nodes freely enter and exit the network without needing to know any details about the topology \cite{overlay}.
 Unstructured P2P networks have poor performance when rare resources are requested, but generally good performance when popular, highly replicated resources are searched for \cite{overlay}.
 
-\paragraph{}
-
-Structured P2P systems often rely on what is called a Distributed Hash Table, or DHT. Distributed Hash Tables work by assigning to each participating node in the network a key.
-The key assigned to a node is determined by the overlay protocol \cite{overlay}. To find a resource in the network, the key, value pair {k,v} is computed and then a request for the resource is routed through the network to the node which has been assigned key k, which returns the resource corresponding to value v.
-Likewise for placing a resource in the network \cite{overlay}.
-
-\subsection{Routing}
-
-\paragraph{}
-
-The routing scheme used in a P2P network is dependent upon whether the network is structured or unstructured.
-Unstructured P2P networks use flooding as the routing mechanism \cite{overlay}, generally with some type of hop-count based TTL in order to avoid queries endlessly routing around the network.
-In structured P2P networks, a node keeps a small routing table which has addresses and DHT key values of neighbouring nodes in the overlay network \cite{overlay}.
-This enables efficient routing, as when a request comes in to a node for key k, the node can determine where to rout the request by using the lookup table.
-
-\paragraph{}
-
-The routing mechanism can have a great affect on the performance of a P2P network.
-For instance, in networks designed for streaming media \cite{streaming} the routing mechanism can determine both the quality of streams in the network and what happens when a peer is interrupted in the midst of forwarding a stream onto other peers.
-
 \subsection{Distributed Hash Tables}
 \label{DHT}
 
 \paragraph{}
-
-Distributed hash tables (DHT) are a type of decentralized distributed system in which data is inserted and accessed through the use of a unique key, similar to a hash table \cite{dht}\cite{wiki-dht}.
+Structured P2P systems often rely on what is called a Distributed Hash table, or DHT. 
+Distributed Hash Tables are a type of decentralized distributed system in which data is inserted and accessed through the use of a unique key, similar to a hash table \cite{dht}\cite{wiki-dht}.
 
 \paragraph{}
-
 Normally, the keyspace of a DHT is represented by the set of strings of digits of a given length.
 A hash function is then chosen which maps both data and participating nodes to keys.
 The hash function used must have some way to define the 'closeness' of two keys \cite{dht}, and is usually chosen such that updates to the DHT only change a localized set of keys \cite{wiki-dht}.
 This property is desirable in a DHT, as remapping the data in the DHT to new keys requires moving the data to different nodes over the network, which can be bandwidth-intensive \cite{wiki-dht}.
 
 \paragraph{}
-
 Data storage in a DHT is distributed across the participating nodes.
 Given some set of data which hashes to key $k$, the node with the 'closest' key will be responsible for storing the data \cite{dht-ietf}.
 When a node joins the DHT and is assigned a key, it will contact 'close' nodes and split the responsibility for storing some of their data with itself \cite{dht-ietf}.
 When a node leaves the DHT, its data is replicated to surviving 'close' nodes \cite{dht-ietf}
 
 \paragraph{}
-
 Lookup in a DHT is accomplished using key-based routing.
-Nodes in the DHT maintain a routing table containing the key of their neighbours.
-When the data stored at key $k$ is requested, the node receiving the request will forward it to the neighbour with the closest key \cite{dht}.
-If the node with the closest key is the node receiving the request, then it is responsible for either storing the data in the request, or retrieving the data with the received key \cite{dht}.
 The number of neighbours a node in the DHT needs to know about is weighed against the longest route length desired in the DHT.
 Increasing the degree of each node has the effect of decreasing the route length, and vice-versa \cite{wiki-dht}.
 Usually, the degree of nodes in the DHT is chosen to provide $O(\log n)$ lookup, where $n$ is the number of nodes in the DHT.
 
 \paragraph{}
-
 DHTs exhibit very desirable properties when used to construct P2P networks.
 They are highly scalable, as load is automatically distributed, they are somewhat robust against node failure, and they are self-organizing \cite{dht-ietf}.
 However, DHTs also offer some challenges.
 Content in a DHT is looked up by key, which causes complications when keyword or content-based searching is required \cite{dht}\cite{dht-ietf}.
 As well, DHTs route based on closest key, when it might also be desirable to route based on the distance of nodes in the underlying network \cite{dht}.
 Routing based on keys has the effect of being ill-equipped to handle changing congestion in the network or being able to find the path with the least delay.
+
+\subsection{Routing}
+
+\paragraph{}
+The routing scheme used in a P2P network is dependent upon whether the network is structured or unstructured.
+Unstructured P2P networks use flooding as the routing mechanism \cite{overlay}, generally with some type of hop-count based TTL in order to avoid queries endlessly routing around the network.
+In structured P2P networks, a node keeps a small routing table which has addresses and DHT key values of neighbouring nodes in the overlay network \cite{overlay}.
+This enables efficient routing, as when a request comes in to a node for key $k$, the node can determine where to rout the request by using the lookup table.
+When the data stored at key $k$ is requested, the node receiving the request will forward it to the neighbour with the closest key \cite{dht}.
+If the node with the closest key is the node receiving the request, then it is responsible for either storing the data in the request, or retrieving the data with the received key \cite{dht}.
+
+\paragraph{}
+The routing mechanism can have a great affect on the performance of a P2P network.
+For instance, in networks designed for streaming media \cite{streaming} the routing mechanism can determine both the quality of streams in the network and what happens when a peer is interrupted in the midst of forwarding a stream onto other peers.
+
 
 \subsection{Resource Discovery}
 \paragraph{}
@@ -138,16 +123,23 @@ As discussed in Section \ref{DHT}, key-based routing allows us to quickly and ef
 The drawbacks of structured solutions are that they do not perform well when given 'fuzzy' queries, and have a higher maintenance overhead as nodes join and leave the network, due to their load-balancing nature \cite{resource}\cite{resource-mobile}.
 
 \subsection{Friend-to-friend Networks}
+
+\paragraph{}
 Another of the challenges of P2P networking is providing anonymity to the users of the network.
 Among the various solutions to this problem, we will discuss friend-to-friend (F2F) networks here.
 F2F networks are a special type of private P2P network in which nodes only directly communicate with known trusted nodes \cite{wiki-f2f}.
 
-
-\section{Applications}
-
-Freenet, BitTorrent
+%\section{Applications}
+%Freenet, BitTorrent
 
 \section{Conclusion}
+
+\paragraph{}
+This paper has summarized our findings on the research of P2P networks. 
+Peer-to-peer networks are important as an alternative to the client-server model of computing. 
+When properly designed, they can be highly scalable, fault-tolerant, and resilient. 
+The major challenges are routing and resource discovery, and these are addressed through the use of Overlay Networks and Distributed Hash Tables. 
+Many of the challenges we encountered in class when it comes to building efficient computing networks are encountered in peer-to-peer networks, and P2P offers unique, valuable, and interesting solutions.
 
 \bibliography{report}
 \bibliographystyle{plain}
