@@ -129,9 +129,36 @@ The drawbacks of structured solutions are that they do not perform well when giv
 Another of the challenges of P2P networking is providing anonymity to the users of the network.
 Among the various solutions to this problem, we will discuss friend-to-friend (F2F) networks here.
 F2F networks are a special type of private P2P network in which nodes only directly communicate with known trusted nodes \cite{wiki-f2f}.
+Connections in an F2F network are manually made by the user to their 'friends', based on prior social trust.
+The idea then is to have enough users of the network that good connectivity and availability is achieved by leveraging the 'small world effect' \cite{small-world}.
 
-%\section{Applications}
-%Freenet, BitTorrent
+\paragraph{}
+Since nodes only communicate to trusted friends, F2F networks provide good security and anonymity benefits, as a user is then only exposed to their friends, and not other users of the network.
+However, these benefits often come at the expense of quality of service.
+When friends drop from the network, it is possible that a node can lose access to some parts of the network \cite{f2f-avail}.
+Additionally, many users have small friend-sets, which makes it hard to find resources on the network \cite{f2f-avail}\cite{f2f-storage}.
+
+\section{Applications}
+
+\paragraph{}
+We will very briefly mention two applications of P2P networking here, to describe how the concepts above can be leveraged to implement applications over P2P architectures.
+
+\subsection{BitTorrent}
+BitTorrent is a P2P file sharing protocol \cite{wiki-bt}.
+Files on BitTorrent are described by a 'torrent' containing some sort of metadata from the file.
+Files are then discovered using 'trackers'.
+Depending on the implementation, either centralized trackers are used with an unstructured overlay network, or decentralized trackers are used with a structured overlay network using DHTs.
+BitTorrent is also interesting from a P2P perspective, since files are downloaded in small segments from many nodes on the network, and then reconstructed.
+This allows BitTorrent to limit the amount of bandwidth consumed by any one node, by distributing the responsibility for serving the file across many nodes.
+
+\subsection{Freenet}
+Freenet is a P2P platform for secure and anonymous communication and file sharing \cite{freenet}.
+Files are split into small encrypted blocks, which are then stored across multiple nodes on the network.
+Freenet uses an anonymous key-based routing similar to DHTs.
+Since nodes only know the key for the content, and not what nodes the content is stored on, anonymity is preserved.
+Freenet is also interesting from a P2P perspective, as it implements two protocols.
+One is called Opennet, which functions similarly to the structured, decentralized, P2P networks described in this report.
+The other is called Darknet, which is a F2F network, which offers better security guarantees than Opennet.
 
 \section{Conclusion}
 
