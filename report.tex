@@ -26,14 +26,15 @@
 A peer-to-peer architecture, or P2P, is the usual alternative to an architecture based on the client-server model.
 In the client-server model, one or more central machines provide resources and services to client machines.
 The two different machines, the client and the server, are separate in the sense that the server performs all or most of the computation on behalf of the client.
-In contrast, within a P2P network all the machines both provide and request computational resources and thus operate both as client and server. All the machines in a peer-to-peer network can therefore be considered equals or ``peers.''
+In contrast, within a P2P network all the machines both provide and request computational resources and thus operate both as client and server. 
+All the machines in a peer-to-peer network can therefore be considered equals or ``peers.''
 
-%\paragraph{}
-
-%This paper seeks to summarize the findings of our research into peer-to-peer networks.
-%It will do so in three parts. First, the major challenges and concepts of P2P networking will be explored; these include network overlays, routing, and resource discovery.
-%Second, some example applications of peer-to-peer computing will be discussed.
-%Finally, our concluding section will summarize peer-to-peer networking and why it is important.
+\paragraph{}
+People are interested in P2P networks for many reasons. 
+They have very interesting scaling and reliability properties. 
+The distributed nature of P2P networks allows for the use of computing resources which are spread out over large geographic areas. 
+This is especially useful for researchers and others who wish to harness large amounts of computational power, but cannot afford to build large datacenters. 
+Many open source P2P applications have as a guiding principle resisting the centralization that comes with the client-server model, and believe that P2P protocols are more respecting of the rights of users.
 
 \section{Core Concepts}
 
@@ -133,6 +134,14 @@ F2F networks are a special type of private P2P network in which nodes only direc
 %Freenet, BitTorrent
 
 \section{Conclusion}
+
+\paragraph{}
+P2P networks relate to what we discussed in class in a number of ways. 
+First and foremost is the development of efficient routing schemes. 
+The schemes discussed here were flooding and key-based routing using routing tables. 
+Routing leads into issues around quality of service. 
+The different routing schemes and network overaly protocols used affect quality of service concerns such as bandwith use, how to deal with loss of nodes, and how to deal with congestion on the network. 
+These are similiar to concerns discussed in class around packet loss, and congestion management in modern day TCP/IP networks.
 
 \paragraph{}
 This paper has summarized our findings on the research of P2P networks. 
